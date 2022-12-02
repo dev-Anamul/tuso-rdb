@@ -1,0 +1,8 @@
+{
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "files.autoSave": "afterDelay",
+  "editor.minimap.enabled": false,
+  "editor.wordWrap": "on"
+}
