@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Fragment } from "react";
-import { useState } from "react";
 import { ArrowLeftCircle, CheckCircle } from "react-feather";
+import { useDispatch } from "react-redux";
 import {
   Card,
   Form,
@@ -12,8 +12,12 @@ import {
   CardBody,
   ModalBody,
 } from "reactstrap";
+import { getAllSyncData } from "../../pages/syncronise/store";
 
 function SyncMOdal({ open, setOpen, sync, setSync }) {
+  const dispatch = useDispatch();
+
+  // ! handler are declared here
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -21,6 +25,7 @@ function SyncMOdal({ open, setOpen, sync, setSync }) {
         synced: sync,
       })
       .then(() => {
+        dispatch(getAllSyncData());
         alert("successfully add");
         setOpen(!open);
       })

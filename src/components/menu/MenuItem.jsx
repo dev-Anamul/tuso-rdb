@@ -8,6 +8,7 @@ import {
   BsGearFill,
 } from "react-icons/bs";
 import useMainMenuActive from "../../customHooks/useMainMenuActive";
+import { Monitor } from "react-feather";
 
 function MenuItem() {
   const loggedInuser = useSelector((state) => state.login.data);
@@ -60,6 +61,17 @@ function MenuItem() {
         </p>
         <p className={`mb-0 ${active.configure ? "orange-500" : ""} `}>
           Settings
+        </p>
+      </Link>
+      <Link
+        className="d-flex flex-column py-2 default-fz px-lg-3 px-md-2 mx-lg-3 text-decoration-none text-black text-center font-fallback text-muted"
+        to="/device/list"
+      >
+        <p className="mb-0 ">
+          <Monitor size={28} className={active.configure ? "orange-500" : ""} />
+        </p>
+        <p className={`mb-0 ${active.configure ? "orange-500" : ""} `}>
+          Device
         </p>
       </Link>
     </>

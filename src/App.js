@@ -47,6 +47,7 @@ import { getUserFromLocal } from "./pages/login/store";
 import { getModuleFromLoacl } from "./pages/module/store";
 import RuleByModule from "./pages/module/role-by-module";
 import AttachmentContext from "./context/AttachMent";
+import DeviceList from "./pages/syncronise/device";
 
 function App() {
   const [attacehMent, setAttacehMent] = useState(null);
@@ -308,6 +309,10 @@ function App() {
         {/* user Edit page */}
         <Route path="/*" element={<PrivateRouter pageId="User" />}>
           <Route path="user/edit/:id" element={<UserEditForm />} />
+        </Route>
+        {/**==================>>>>> Device inventory Routes <<< ================== **/}
+        <Route path="/*" element={<PrivateRouter pageId={"Settings"} />}>
+          <Route path="device/list" element={<DeviceList />} />
         </Route>
 
         {/**==================>>>>> Not Found Routes <<< ================== **/}
