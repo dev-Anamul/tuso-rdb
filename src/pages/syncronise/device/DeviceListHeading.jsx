@@ -2,7 +2,7 @@ import React from "react";
 
 function DeviceListHeading() {
   return (
-    <tr>
+    <tr className="font-fallback border-bottom border-dark border-2 fw-bolder table__heading-text">
       <th>Username</th>
       <th>Device name</th>
       <th>Public IP address</th>

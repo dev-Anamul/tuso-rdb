@@ -7,13 +7,9 @@ const deviceArr = [1, 3, 4, 5, 6, 7, 8];
 function DeviceTable() {
   return (
     <div>
-      <table>
-        <thead>
-          <DeviceListHeading />
-        </thead>
-        <tbody>
-          {deviceArr && deviceArr.map((device) => <DeviceListRow />)}
-        </tbody>
+      <table className="responsive_table_class w-100">
+        <DeviceListHeading />
+        {deviceArr && deviceArr.map((device) => <DeviceListRow />)}
       </table>
     </div>
   );

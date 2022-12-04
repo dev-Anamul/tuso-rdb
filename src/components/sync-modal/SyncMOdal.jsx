@@ -59,7 +59,7 @@ function SyncMOdal({ open, setOpen, sync, setSync }) {
                   <Input
                     type="text"
                     id="sync"
-                    placeholder="Enter sync time"
+                    placeholder="Enter Sync Time"
                     value={sync}
                     onChange={(e) => setSync(e.target.value)}
                   />

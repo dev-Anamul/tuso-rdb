@@ -51,7 +51,9 @@ function DeviceList() {
         ) : (
           <Row>
             <Col sm="12">
-              <div className="display-6 font-fallback">User List</div>
+              <div className="display-6 font-fallback mt-3">
+                Device Inventory
+              </div>
               <hr className="border border-2 border-dark my-4" />
 
               {/* {addUserError ? (
@@ -81,13 +83,13 @@ function DeviceList() {
             )} */}
 
               <Card className="px-4 py-4 border-0 shadow overflow-auto mb-5">
-                <div className="mb-3 d-sm-flex justify-content-between responsive_table_class">
-                  <Button
+                <div className="mb-3 d-sm-flex justify-content-end responsive_table_class">
+                  {/* <Button
                     className="add-button border-0 font-fallback default-fz d-block "
                     onClick={handleAddButtonClick}
                   >
                     <PlusCircle size={20} className=" me-1" /> Add User
-                  </Button>
+                  </Button> */}
                   <div className="d-flex mt-2 mt-sm-0">
                     <Input
                       type="select"
@@ -120,7 +122,7 @@ function DeviceList() {
                 <DeviceTable />
 
                 {/* pagination item are here */}
-                <div className="d-flex justify-content-between align-items-center responsive_table_class">
+                <div className="d-flex justify-content-between align-items-center responsive_table_class mt-3">
                   <div className={`d-flex align-items-center`}>
                     <Label
                       for="limit"

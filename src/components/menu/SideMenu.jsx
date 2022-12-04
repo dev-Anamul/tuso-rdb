@@ -247,7 +247,7 @@ function SideMenu() {
                     className={`pb-1 me-2 ${false ? "orange-500" : ""}`}
                   />
                 </span>
-                <span className={false ? "orange-500" : ""}>sync time</span>
+                <span className={false ? "orange-500" : ""}>Sync Time</span>
               </Link>
             </Nav.Item>
           </div>
