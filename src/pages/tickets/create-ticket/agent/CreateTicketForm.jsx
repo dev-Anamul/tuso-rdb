@@ -117,6 +117,8 @@ function ClientTicketCreateForm() {
         createdBy: null,
         dateModified: null,
         modifiedBy: null,
+        ModifiedByAgent: logedInuser.oid,
+        ModifiedByAgentDate: new Date().toISOString(),
         isDeleted: false,
       };
 

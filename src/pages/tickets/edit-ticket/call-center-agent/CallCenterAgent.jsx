@@ -62,7 +62,7 @@ function CallCenterTicketEditForm() {
   const selectedFacility = useSelector(
     (state) => state.facility.selectedFacility
   );
-
+  const logedInuser = useSelector((state) => state.login.data);
   // ! extra variables are declared here
   const date = useMemo(() => {
     if (ticketData) {
@@ -137,6 +137,8 @@ function CallCenterTicketEditForm() {
         // createdBy: null,
         // dateModified: null,
         // modifiedBy: null,
+        ModifiedByAgent: logedInuser?.id,
+        ModifiedByAgentDate: new Date().toISOString(),
         // isDeleted: false,
       };
 
