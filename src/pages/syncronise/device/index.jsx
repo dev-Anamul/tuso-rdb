@@ -1,24 +1,40 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
-import { PlusCircle } from "react-feather";
+import { AlignJustify, PlusCircle } from "react-feather";
+import { useDispatch, useSelector } from "react-redux";
 import { Button, Card, Col, Container, Input, Label, Row } from "reactstrap";
 import NavMenu from "../../../components/header/NavMenu";
 import CustomPagination from "../../../components/pagination/CustomPagination";
 import Spinner from "../../../components/spinner/Spinner";
+import { getAllDeivces, getDeviceByFilter, getFileterDeivces } from "../store";
 import DeviceTable from "./DeviceTable";
-
-const roleData = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import SearchOffcanvas from "./SearchOffcanvas";
 
 function DeviceList() {
   // ! local state are delcared
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [limit, setLimit] = useState(10);
-  const [selectRole, setSelectRole] = useState("all");
+  const [selectStatus, setSelectStatus] = useState("all");
   const [searchName, setSearchName] = useState("");
+  const [show, setShow] = useState(false);
+  const [advanceObject, setAdvanceObject] = useState({});
+  const [advanceSearch, setAdvanceSearch] = useState({
+    UserName: "",
+    DeviceName: "",
+    PublicIP: "",
+    Status: "online",
+  });
 
   // ! hooks are initialized here
-  const totalUser = 200;
   const loading = false;
+  const dispatch = useDispatch();
+
+  // ! get DAta from redux store
+  const totalDevices = useSelector(
+    (state) => state.syncData.devices.totalDeviceInformation
+  );
+  const deviceList = useSelector((state) => state.syncData.devices.list);
 
   // ! handler are declared here
   const handleLimitChange = (e) => {
@@ -29,13 +45,76 @@ function DeviceList() {
     console.log("add button clicked");
   };
 
-  const handleRoleChange = (e) => {
-    setSelectRole(e.target.value);
+  const handleStatusChange = (e) => {
+    setAdvanceObject({});
+    setSelectStatus(e.target.value);
   };
 
   const handleSearchName = (e) => {
+    setCurrentPage(0);
+    setAdvanceObject({});
     setSearchName(e.target.value);
   };
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const handleAdvanceSearch = (e) => {
+    e.preventDefault();
+    setAdvanceObject(advanceSearch);
+    setShow(false);
+  };
+
+  const clearAdvanceSearch = () => {
+    setAdvanceSearch({
+      UserName: "",
+      DeviceName: "",
+      PublicIP: "",
+      Status: "online",
+    });
+
+    setAdvanceObject({});
+    setShow(false);
+  };
+
+  const handleAdvanceSearchChange = (e) => {
+    setAdvanceSearch({
+      ...advanceSearch,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    if (Object.keys(advanceObject).length > 0) {
+      dispatch(
+        getDeviceByFilter({
+          start: currentPage * limit,
+          take: limit,
+          UserName: advanceObject.UserName,
+          DeviceName: advanceObject.DeviceName,
+          PublicIP: advanceObject.PublicIP,
+          Status: advanceObject.Status,
+        })
+      );
+    } else if (searchName) {
+      dispatch(
+        getFileterDeivces({
+          start: currentPage * limit,
+          take: limit,
+          UserName: searchName,
+          Status: selectStatus,
+        })
+      );
+    } else if (!searchName) {
+      dispatch(
+        getFileterDeivces({
+          start: currentPage * limit,
+          take: limit,
+          Status: selectStatus,
+        })
+      );
+    }
+  }, [currentPage, limit, dispatch, searchName, selectStatus, advanceObject]);
 
   return (
     <>
@@ -56,70 +135,40 @@ function DeviceList() {
               </div>
               <hr className="border border-2 border-dark my-4" />
 
-              {/* {addUserError ? (
-              <Alert
-                isOpen={!!addUserError}
-                color="danger"
-                className="font-fallback default-fz"
-                toggle={dismissAlert}
-              >
-                <XCircle size={18} className="mb-1 me-1" />
-                {addUserError?.includes("400")
-                  ? "The Username/cellphone is associated with another user account!"
-                  : addUserError?.includes("500")
-                  ? "Something went wrong, please try after sometimes! If you are experiencing similar frequently, please report it to helpdesk."
-                  : ""}
-              </Alert>
-            ) : (
-              <CustomAlert
-                addSuccess={addUserSuccess}
-                addError={addUserError}
-                updateSuccess={updateUserSuccess}
-                updateError={updateUserError}
-                deleteSuccess={deleteUserSuccess}
-                deleteError={deleteUserError}
-                dismissAlert={dismissAlert}
-              />
-            )} */}
-
               <Card className="px-4 py-4 border-0 shadow overflow-auto mb-5">
-                <div className="mb-3 d-sm-flex justify-content-end responsive_table_class">
-                  {/* <Button
-                    className="add-button border-0 font-fallback default-fz d-block "
-                    onClick={handleAddButtonClick}
-                  >
-                    <PlusCircle size={20} className=" me-1" /> Add User
-                  </Button> */}
+                <div className="mb-3 d-sm-flex justify-content-end responsive_table_class align-items-center">
                   <div className="d-flex mt-2 mt-sm-0">
                     <Input
                       type="select"
                       name="select"
                       id="exampleSelect"
                       className="font-fallback default-fz"
-                      value={selectRole}
-                      onChange={handleRoleChange}
+                      value={selectStatus}
+                      onChange={handleStatusChange}
                     >
-                      <option value={0}>All</option>
-                      {roleData &&
-                        roleData.map((role) => (
-                          <option key={role} value={role}>
-                            {role}
-                          </option>
-                        ))}
+                      <option value="all">All</option>
+                      <option value="online">Online</option>
+                      <option value="offline">Off-line</option>
                     </Input>
                     &nbsp;
                     <Input
                       type="text"
                       name="search"
                       className="font-fallback default-fz d-inline-block"
-                      placeholder="Search By Name"
+                      placeholder="Search By username"
                       value={searchName}
                       onChange={handleSearchName}
                     />
                   </div>
+                  &nbsp;
+                  <AlignJustify
+                    size={40}
+                    className="border p-1 rounded cursor-pointer"
+                    onClick={handleShow}
+                  />
                 </div>
                 {/* ! Device Table */}
-                <DeviceTable />
+                <DeviceTable deviceList={deviceList} />
 
                 {/* pagination item are here */}
                 <div className="d-flex justify-content-between align-items-center responsive_table_class mt-3">
@@ -149,7 +198,15 @@ function DeviceList() {
                       currentPage={currentPage}
                       limit={limit}
                       setCurrentPage={setCurrentPage}
-                      totalItemCount={totalUser}
+                      totalItemCount={totalDevices}
+                    />
+                    <SearchOffcanvas
+                      show={show}
+                      handleClose={handleClose}
+                      handleAdvanceSearch={handleAdvanceSearch}
+                      handleAdvanceSearchChange={handleAdvanceSearchChange}
+                      advanceSearch={advanceSearch}
+                      clearAdvanceSearch={clearAdvanceSearch}
                     />
                   </div>
                 </div>

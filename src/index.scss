@@ -99,9 +99,22 @@ html {
   height: 100vh !important;
 }
 
+// max width
+.max-width-80vh {
+  max-width: 80vh;
+}
+.max-height-80vh {
+  max-height: 80vh !important;
+}
+
 // width in pixel
 .width-500 {
   width: 500px !important;
+}
+
+// curosr
+.cursor-pointer {
+  cursor: pointer !important;
 }
 // ! position center
 .position_center {

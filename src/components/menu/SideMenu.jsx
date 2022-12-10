@@ -25,7 +25,7 @@ function SideMenu() {
   const curretPath = location.pathname;
 
   // ! get data from redux store
-  const stateSync = useSelector((state) => state.syncData.data);
+  
 
   // ! functions are declared here
   useEffect(() => {
@@ -237,17 +237,16 @@ function SideMenu() {
               <Link
                 className="d-inline-block text-decoration-none text-muted font-fallback default-fz sidebar_item-hover py-2"
                 onClick={() => {
-                  setSync(stateSync?.synced);
                   setOpen(!open);
                 }}
               >
                 <span>
                   <Circle
                     size={20}
-                    className={`pb-1 me-2 ${false ? "orange-500" : ""}`}
+                    className={`pb-1 me-2 ${open ? "orange-500" : ""}`}
                   />
                 </span>
-                <span className={false ? "orange-500" : ""}>Sync Time</span>
+                <span className={open ? "orange-500" : ""}>Sync Time</span>
               </Link>
             </Nav.Item>
           </div>

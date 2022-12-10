@@ -8,6 +8,7 @@ function useMainMenuActive() {
     user: false,
     configure: false,
     notification: false,
+    device: false,
   });
 
   const location = useLocation();
@@ -58,6 +59,16 @@ function useMainMenuActive() {
         user: true,
         configure: false,
         notification: false,
+      }));
+    } else if (curretPath.startsWith("/device/")) {
+      setActive((prev) => ({
+        ...prev,
+        dashBoard: false,
+        ticket: false,
+        user: false,
+        configure: false,
+        notification: false,
+        device: true,
       }));
     }
   }, [curretPath]);

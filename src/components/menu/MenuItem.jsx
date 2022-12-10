@@ -68,11 +68,9 @@ function MenuItem() {
         to="/device/list"
       >
         <p className="mb-0 ">
-          <Monitor size={28} className={active.configure ? "orange-500" : ""} />
+          <Monitor size={28} className={active.device ? "orange-500" : ""} />
         </p>
-        <p className={`mb-0 ${active.configure ? "orange-500" : ""} `}>
-          Device
-        </p>
+        <p className={`mb-0 ${active.device ? "orange-500" : ""}`}>Device</p>
       </Link>
     </>
   );

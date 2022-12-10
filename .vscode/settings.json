@@ -4,5 +4,6 @@
   },
   "files.autoSave": "afterDelay",
   "editor.minimap.enabled": false,
-  "editor.wordWrap": "on"
+  "editor.wordWrap": "on",
+  "editor.fontSize": 16
 }

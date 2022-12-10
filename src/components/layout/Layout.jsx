@@ -29,7 +29,7 @@ function Layout({ children }) {
               } custom-layout__sidebar--align`}
             >
               <Col lg={6} className="position-relative">
-                <div className="sidebar_menu_wrapper card border-0 position-fixed shadow-sm rounded py-5 mt-4">
+                <div className="sidebar_menu_wrapper card border-0 position-fixed shadow-sm rounded py-5 mt-4 overflow-auto max-height-80vh">
                   <SideMenu />
                 </div>
               </Col>

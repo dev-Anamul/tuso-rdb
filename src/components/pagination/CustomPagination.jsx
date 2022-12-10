@@ -8,7 +8,6 @@ function CustomPagination({
   totalItemCount,
 }) {
   const handlePagination = (page) => {
-    console.log("handle pagination function");
     setCurrentPage(page.selected);
   };
   return (

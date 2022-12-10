@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { Fragment } from "react";
 import { ArrowLeftCircle, CheckCircle } from "react-feather";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Card,
   Form,
@@ -12,10 +12,14 @@ import {
   CardBody,
   ModalBody,
 } from "reactstrap";
+import Swal from "sweetalert2";
 import { getAllSyncData } from "../../pages/syncronise/store";
 
 function SyncMOdal({ open, setOpen, sync, setSync }) {
   const dispatch = useDispatch();
+
+  // ! get data from the redux store
+  const stateSync = useSelector((state) => state.syncData.data);
 
   // ! handler are declared here
   const handleSubmit = (e) => {
@@ -26,7 +30,19 @@ function SyncMOdal({ open, setOpen, sync, setSync }) {
       })
       .then(() => {
         dispatch(getAllSyncData());
-        alert("successfully add");
+        Swal.fire({
+          icon: "success",
+          title: `Record ${
+            stateSync?.synced ? "Updated" : "added"
+          } Successfully`,
+          showConfirmButton: true,
+          customClass: {
+            title: "default-fz",
+            confirmButton: "btn add-button px-4 py-2",
+          },
+          buttonsStyling: false,
+        });
+        setSync("");
         setOpen(!open);
       })
       .catch(() => {
@@ -51,6 +67,7 @@ function SyncMOdal({ open, setOpen, sync, setSync }) {
           <hr className="border border-2 border-dark my-4" />
           <Card className="">
             <CardBody>
+              <div className="fw-bold mb-2">Sync Time: {stateSync?.synced}</div>
               <Form onSubmit={handleSubmit}>
                 <div className="mb-1">
                   <Label className="form-label" for="sync">
