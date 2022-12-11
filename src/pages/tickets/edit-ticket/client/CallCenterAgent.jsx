@@ -108,7 +108,7 @@ function CallCenterTicketEditForm() {
         // isOpen: true,
         // projects: null,
         // facilities: null,
-        reportedBy: logedInuser.oid,
+        reportedBy: logedInuser?.oid,
         // teamID: null,
         // teams: null,
         // assignedTo: null,
@@ -122,7 +122,7 @@ function CallCenterTicketEditForm() {
         // dateCreated: new Date(),
         // createdBy: null,
         // dateModified: null,
-        // modifiedBy: null,
+        modifiedBy: logedInuser?.oid,
         // isDeleted: false,
       };
       console.log(incidentObject);

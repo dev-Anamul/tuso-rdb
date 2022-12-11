@@ -70,6 +70,7 @@ function CallCenterTicketEditForm() {
   const selectedFacility = useSelector(
     (state) => state.facility.selectedFacility
   );
+  const loggedInuser = useSelector((state) => state.login.data);
 
   // ! useMemo is used here
   const date = useMemo(() => {
@@ -144,7 +145,7 @@ function CallCenterTicketEditForm() {
         dateOfIncident: dateReported,
         // createdBy: null,
         // dateModified: null,
-        // modifiedBy: null,
+        modifiedBy: loggedInuser?.oid,
         // isDeleted: false,
       };
 

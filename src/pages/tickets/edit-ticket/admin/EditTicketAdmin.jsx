@@ -158,7 +158,7 @@ function CallCenterTicketEditForm() {
         dateOfIncident: dateReported,
         // createdBy: null,
         // dateModified: null,
-        // modifiedBy: null,
+        modifiedBy: loggedInuser?.oid,
         // isDeleted: false,
       };
 

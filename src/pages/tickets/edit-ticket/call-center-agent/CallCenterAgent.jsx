@@ -136,9 +136,7 @@ function CallCenterTicketEditForm() {
         // messages: null,
         // createdBy: null,
         // dateModified: null,
-        // modifiedBy: null,
-        ModifiedByAgent: logedInuser?.id,
-        ModifiedByAgentDate: new Date().toISOString(),
+        modifiedBy: logedInuser?.oid,
         // isDeleted: false,
       };
 
