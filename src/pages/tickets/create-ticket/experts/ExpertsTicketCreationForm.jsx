@@ -136,7 +136,7 @@ function ExpertsTicketCreationForm() {
         priorityID: priorityID,
         incidentPriority: null,
         messages: null,
-        dateOfIncident: dateReported,
+        dateOfIncident: dateReported.toISOString(),
         dateCreated: new Date().toISOString(),
         createdBy: null,
         dateModified: null,
@@ -640,7 +640,9 @@ function ExpertsTicketCreationForm() {
                     }
                   }}
                 />
-              <p className="font-fallback font-size-14 text-muted">Please choose only jpg or png file.</p>
+                <p className="font-fallback font-size-14 text-muted">
+                  Please choose only jpg or png file.
+                </p>
               </FormGroup>
             </Col>
           </Row>

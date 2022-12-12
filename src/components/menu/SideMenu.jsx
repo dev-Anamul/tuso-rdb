@@ -25,7 +25,6 @@ function SideMenu() {
   const curretPath = location.pathname;
 
   // ! get data from redux store
-  
 
   // ! functions are declared here
   useEffect(() => {
@@ -230,6 +229,24 @@ function SideMenu() {
                 </span>
                 <span className={activeSide.priority ? "orange-500" : ""}>
                   Priority
+                </span>
+              </Link>
+            </Nav.Item>
+            <Nav.Item className="">
+              <Link
+                className="d-inline-block text-decoration-none text-muted font-fallback default-fz sidebar_item-hover py-2"
+                to={"/config/a/ticket-life"}
+              >
+                <span>
+                  <Circle
+                    size={20}
+                    className={`pb-1 me-2 ${
+                      activeSide.priority ? "orange-500" : ""
+                    }`}
+                  />
+                </span>
+                <span className={activeSide.priority ? "orange-500" : ""}>
+                  Ticket Life
                 </span>
               </Link>
             </Nav.Item>

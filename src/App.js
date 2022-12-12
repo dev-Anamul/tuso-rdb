@@ -48,6 +48,7 @@ import { getModuleFromLoacl } from "./pages/module/store";
 import RuleByModule from "./pages/module/role-by-module";
 import AttachmentContext from "./context/AttachMent";
 import DeviceList from "./pages/syncronise/device";
+import TicketLifeList from "./pages/ticket-lifecycle/ticket-life";
 
 function App() {
   const [attacehMent, setAttacehMent] = useState(null);
@@ -185,6 +186,11 @@ function App() {
         {/* Project */}
         <Route path="/config/*" element={<PrivateRouter pageId="Settings" />}>
           <Route path="a/project/:id/user" element={<UserBySystem />} />
+        </Route>
+
+        {/* ticket life */}
+        <Route path="/config/*" element={<PrivateRouter pageId="Settings" />}>
+          <Route path="a/ticket-life" element={<TicketLifeList />} />
         </Route>
 
         {/**==================>>>>> Ticket Routes <<< ================== **/}

@@ -16,6 +16,7 @@ import message from "../pages/message/store";
 import member from "../pages/member/store";
 import systemPermission from "../pages/system-permission/store";
 import syncData from "../pages/syncronise/store";
+import ticketLifecycle from "../pages/ticket-lifecycle/store";
 
 const rootReducer = {
   country,
@@ -35,6 +36,7 @@ const rootReducer = {
   member,
   systemPermission,
   syncData,
+  ticketLifecycle,
 };
 
 export default rootReducer;
