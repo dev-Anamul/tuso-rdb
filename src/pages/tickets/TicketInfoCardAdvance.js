@@ -27,6 +27,7 @@ import {
 function TicketInfoCardAdvance({ data, currentPage, limit, status }) {
   // ! date are declared here
   const date = new Date(data.dateReported);
+  const dateOfincident = new Date(data.dateOfIncident);
 
   // ! hooks are initialized here
   const navigate = useNavigate();
@@ -137,7 +138,7 @@ function TicketInfoCardAdvance({ data, currentPage, limit, status }) {
               </p>
               <p className="mb-0 font-fallback">
                 Date of Incident: &nbsp;
-                {date.toLocaleDateString("en-US", {
+                {dateOfincident.toLocaleDateString("en-US", {
                   year: "numeric",
                   month: "short",
                   day: "numeric",

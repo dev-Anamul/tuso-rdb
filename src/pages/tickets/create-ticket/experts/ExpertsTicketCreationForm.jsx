@@ -136,8 +136,8 @@ function ExpertsTicketCreationForm() {
         priorityID: priorityID,
         incidentPriority: null,
         messages: null,
-        dateOfIncident: dateReported.toISOString(),
-        dateCreated: new Date().toISOString(),
+        dateOfIncident: dateReported.toDateString(),
+        dateCreated: new Date().toDateString(),
         createdBy: null,
         dateModified: null,
         modifiedBy: null,
@@ -361,7 +361,10 @@ function ExpertsTicketCreationForm() {
                   dateFormat="dd/MM/yyyy"
                   placeholderText="dd/mm/yyyy"
                   maxDate={new Date()}
-                  onChange={(date) => setDateReported(date)}
+                  onChange={(date) => {
+                    console.log(date);
+                    setDateReported(date);
+                  }}
                   onKeyDown={(e) => e.preventDefault()}
                 />
               </FormGroup>
