@@ -103,7 +103,7 @@ function ClientTicketCreateForm() {
         priorityID: null,
         incidentPriority: null,
         messages: null,
-        dateOfIncident: dateReported,
+        dateOfIncident: dateReported.toDateString(),
         dateCreated: new Date().toISOString(),
         createdBy: null,
         dateModified: null,
